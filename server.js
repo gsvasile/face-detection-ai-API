@@ -17,15 +17,15 @@ const db = knex({
     }
 });
 
-console.log('-----------------------------');
-console.log(db.select('id', 'name').from('users'));
-console.log('-----------------------------');
-
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
+
+console.log('------------START START UP---------------');
+console.log(db.select('id', 'name').from('users'));
+console.log('------------END START UP---------------');
 app.get('/', (req, res) => {
     res.send('success');
 });

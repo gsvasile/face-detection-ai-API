@@ -6,11 +6,13 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
     const hash = bcrypt.hashSync(password, saltRounds);
     console.log(db);
     db.transaction(trx => {
-        console.log('-----------------------------');
+        console.log('------------START--------------');
         console.log(trx);
+        console.log('-----------TRXXXXXXXXXXXXXXXXXXX-----------');
         console.log(email);
+        console.log('-----------EMAAAILLL-----------');
         console.log(hash);
-        console.log('-----------------------------');
+        console.log('-----------ENDDDDD-----------');
         trx.insert({
             hash: hash,
             email: email
@@ -32,7 +34,7 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
             .then(trx.commit)
             .catch(trx.rollback);
     })
-        .catch(err => res.status(400).json('unable to register'));
+        .catch(err => res.status(400).json('unable to register : ' + err));
 }
 
 module.exports.register = register;
