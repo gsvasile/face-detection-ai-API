@@ -11,8 +11,12 @@ const saltRounds = 10;
 
 const db = knex({
     client: 'pg',
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
+    connection: {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
 });
 
 const app = express();
