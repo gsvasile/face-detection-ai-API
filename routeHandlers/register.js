@@ -4,7 +4,7 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
         return res.status(400).json('incorrect form submission');
     }
     const hash = bcrypt.hashSync(password, saltRounds);
-    console.log(hash);
+    console.log(db);
     db.transaction(trx => {
         trx.insert({
             hash: hash,
