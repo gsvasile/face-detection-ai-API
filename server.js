@@ -22,7 +22,9 @@ app.use(cors());
 
 
 console.log('------------START START UP---------------');
-console.log(db.select('id', 'name').from('users')).catch(err => console.log('---ERROR --: ' + err));
+db.select('id', 'name').from('users')
+    .then(data => console.log('---DATA----: ' + data))
+    .catch(err => console.log('---ERROR --: ' + err));
 console.log('------------END START UP---------------');
 app.get('/', (req, res) => {
     res.send('success');
