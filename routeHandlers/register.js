@@ -13,6 +13,11 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
             .into('login')
             .returning('email')
             .then(loginEmail => {
+                console.log('-----------------------------');
+                console.log(trx);
+                console.log(email);
+                console.log(hash);
+                console.log('-----------------------------');
                 return trx('users')
                     .returning('*')
                     .insert({
