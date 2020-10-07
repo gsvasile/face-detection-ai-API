@@ -6,6 +6,11 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
     const hash = bcrypt.hashSync(password, saltRounds);
     console.log(db);
     db.transaction(trx => {
+        console.log('-----------------------------');
+        console.log(trx);
+        console.log(email);
+        console.log(hash);
+        console.log('-----------------------------');
         trx.insert({
             hash: hash,
             email: email
@@ -13,11 +18,6 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
             .into('login')
             .returning('email')
             .then(loginEmail => {
-                console.log('-----------------------------');
-                console.log(trx);
-                console.log(loginEmail);
-                console.log(hash);
-                console.log('-----------------------------');
                 return trx('users')
                     .returning('*')
                     .insert({
