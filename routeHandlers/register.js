@@ -15,7 +15,7 @@ const register = (db, bcrypt, saltRounds) => (req, res) => {
             .then(loginEmail => {
                 console.log('-----------------------------');
                 console.log(trx);
-                console.log(email);
+                console.log(loginEmail);
                 console.log(hash);
                 console.log('-----------------------------');
                 return trx('users')

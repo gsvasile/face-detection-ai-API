@@ -17,6 +17,10 @@ const db = knex({
     }
 });
 
+console.log('-----------------------------');
+console.log(process.env.DATABASE_URL);
+console.log('-----------------------------');
+
 const app = express();
 
 app.use(express.json());
