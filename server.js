@@ -35,6 +35,7 @@ app.post('/register', registerHandler.register(db, bcrypt, saltRounds));
 app.get('/profile/:id', profileHandler.getProfile(db));
 
 app.put('/image', imageHandler.getImageFaceInformation(db));
+app.post('/imageurl', imageHandler.handleApiCall());
 
 app.listen(3001, () => {
     console.log('all systems are a go, port 3001');

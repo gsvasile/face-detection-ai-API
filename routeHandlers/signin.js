@@ -1,4 +1,8 @@
 const signin = (db, bcrypt) => (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json('incorrect form submission');
+    }
     const lowerCaseEmail = req.body.email.toLowerCase();
     db.select('email', 'hash').from('login')
         .whereRaw('LOWER(email) = ?', [lowerCaseEmail])
