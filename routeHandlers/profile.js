@@ -1,4 +1,4 @@
-const getProfile = (req, res, db) => {
+const getProfile = (db) => (req, res) => {
     const { id } = req.params;
     db.select('*').from('users').where({ id })
         .then(user => {

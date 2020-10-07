@@ -1,4 +1,4 @@
-const register = (req, res, db, bcrypt, saltRounds) => {
+const register = (db, bcrypt, saltRounds) => (req, res) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, saltRounds);
     db.transaction(trx => {

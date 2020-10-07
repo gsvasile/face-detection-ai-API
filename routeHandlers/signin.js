@@ -1,4 +1,4 @@
-const signin = (req, res, db, bcrypt) => {
+const signin = (db, bcrypt) => (req, res) => {
     const lowerCaseEmail = req.body.email.toLowerCase();
     db.select('email', 'hash').from('login')
         .whereRaw('LOWER(email) = ?', [lowerCaseEmail])

@@ -28,21 +28,13 @@ app.get('/', (req, res) => {
     res.send('success');
 });
 
-app.post('/signin', (req, res) => {
-    signinHandler.signin(req, res, db, bcrypt);
-});
+app.post('/signin', signinHandler.signin(db, bcrypt));
 
-app.post('/register', (req, res) => {
-    registerHandler.register(req, res, db, bcrypt, saltRounds);
-});
+app.post('/register', registerHandler.register(db, bcrypt, saltRounds));
 
-app.get('/profile/:id', (req, res) => {
-    profileHandler.getProfile(req, res, db);
-});
+app.get('/profile/:id', profileHandler.getProfile(db));
 
-app.put('/image', (req, res) => {
-    imageHandler.getImageFaceInformation(req, res, db);
-})
+app.put('/image', imageHandler.getImageFaceInformation(db));
 
 app.listen(3001, () => {
     console.log('all systems are a go, port 3001');
