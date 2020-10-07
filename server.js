@@ -18,7 +18,7 @@ const db = knex({
 });
 
 console.log('-----------------------------');
-console.log(process.env.DATABASE_URL);
+console.log(db.select('*').from('users'));
 console.log('-----------------------------');
 
 const app = express();
