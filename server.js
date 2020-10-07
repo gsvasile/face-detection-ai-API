@@ -29,14 +29,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/signin', signinHandler.signin(db, bcrypt));
-
 app.post('/register', registerHandler.register(db, bcrypt, saltRounds));
-
 app.get('/profile/:id', profileHandler.getProfile(db));
-
 app.put('/image', imageHandler.getImageFaceInformation(db));
 app.post('/imageurl', imageHandler.handleApiCall());
 
-app.listen(3001, () => {
-    console.log('all systems are a go, port 3001');
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`all systems are a go on port ${PORT}`);
 });
