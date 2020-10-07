@@ -1,6 +1,4 @@
-const bcrypt = require('bcrypt');
-
-const signin = (req, res, db) => {
+const signin = (req, res, db, bcrypt) => {
     const lowerCaseEmail = req.body.email.toLowerCase();
     db.select('email', 'hash').from('login')
         .whereRaw('LOWER(email) = ?', [lowerCaseEmail])
@@ -10,7 +8,6 @@ const signin = (req, res, db) => {
                 return db.select('*').from('users')
                     .whereRaw('LOWER(email) = ?', [lowerCaseEmail])
                     .then(user => {
-                        console.log(user);
                         res.json(user[0])
                     })
                     .catch(err => res.status(400).json('unable to get user'));

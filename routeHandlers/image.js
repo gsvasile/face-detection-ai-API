@@ -1,4 +1,6 @@
-const getImageFaceInformation = (res, id, db) => {
+const getImageFaceInformation = (req, res, db) => {
+    const { id } = req.body;
+
     db('users').where('id', '=', id)
         .increment('entries', 1)
         .returning('entries')

@@ -1,9 +1,6 @@
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-const register = (email, name, password, res, db) => {
+const register = (req, res, db, bcrypt, saltRounds) => {
+    const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, saltRounds);
-
     db.transaction(trx => {
         trx.insert({
             hash: hash,

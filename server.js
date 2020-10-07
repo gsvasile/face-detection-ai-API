@@ -1,10 +1,13 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
 const registerHandler = require('./routeHandlers/register');
 const profileHandler = require('./routeHandlers/profile');
 const imageHandler = require('./routeHandlers/image');
 const signinHandler = require('./routeHandlers/signin');
+
+const saltRounds = 10;
 
 const db = knex({
     client: 'pg',
@@ -26,24 +29,21 @@ app.get('/', (req, res) => {
 });
 
 app.post('/signin', (req, res) => {
-    signinHandler.signin(req, res, db);
+    signinHandler.signin(req, res, db, bcrypt);
 });
 
 app.post('/register', (req, res) => {
-    const { email, name, password } = req.body;
-    registerHandler.register(email, name, password, res, db);
+    registerHandler.register(req, res, db, bcrypt, saltRounds);
 });
 
 app.get('/profile/:id', (req, res) => {
-    const { id } = req.params;
-    profileHandler.getProfile(id, res, db);
+    profileHandler.getProfile(req, res, db);
 });
 
 app.put('/image', (req, res) => {
-    const { id } = req.body;
-    imageHandler.getImageFaceInformation(res, id, db);
+    imageHandler.getImageFaceInformation(req, res, db);
 })
 
 app.listen(3001, () => {
-    console.log('all systems are a go, port 3000');
+    console.log('all systems are a go, port 3001');
 });
