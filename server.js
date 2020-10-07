@@ -12,9 +12,7 @@ const saltRounds = 10;
 const db = knex({
     client: 'pg',
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    ssl: true
 });
 
 const app = express();
@@ -24,7 +22,7 @@ app.use(cors());
 
 
 console.log('------------START START UP---------------');
-console.log(db.select('id', 'name').from('users'));
+console.log(db.select('id', 'name').from('users')).catch(err => console.log('---ERROR --: ' + err));
 console.log('------------END START UP---------------');
 app.get('/', (req, res) => {
     res.send('success');
