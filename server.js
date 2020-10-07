@@ -18,7 +18,7 @@ const db = knex({
 });
 
 console.log('-----------------------------');
-console.log(db.select('*').from('users'));
+console.log(db.select('id', 'name').from('users'));
 console.log('-----------------------------');
 
 const app = express();
